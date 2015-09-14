@@ -18,7 +18,7 @@
     document.write(examples.simple.helloTestUnQuotedAttributeValue({data: ' style="input"'}));
 
     document.write(examples.simple.helloTestDoubleQuotedAttributeValueURI({data: 'javascript:alert(0);'}));
-    document.write(examples.simple.helloTestDoubleQuotedAttributeValueJSURI({data: '\'\n'}));
+    document.write(examples.simple.helloTestDoubleQuotedAttributeValueJSURI({data: '\');alert(0);//'}));
 
     document.write(examples.simple.helloTestScript({data: 'alert(0);'}));
     document.write(examples.simple.helloTestStyle({data: 'body { color:red; }'}));
