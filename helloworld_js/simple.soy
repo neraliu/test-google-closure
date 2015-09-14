@@ -1,0 +1,138 @@
+{namespace examples.simple}
+
+/**
+ * Says hello to the world.
+ */
+{template .helloWorld autoescape="strict"}
+  Hello world!
+{/template}
+
+/**
+ * HTML test
+ * @param data The unstrusted input data.
+ */
+{template .helloTestHTML autoescape="strict"}
+  <div>{$data}</div>
+{/template}
+
+/**
+ * Attribute name test
+ * @param data The unstrusted input data.
+ */
+{template .helloTestAttributeName autoescape="strict"}
+  <div {$data}>Hello World</div>
+{/template}
+
+/**
+ * Double-quoted Attribute value test
+ * @param data The unstrusted input data.
+ */
+{template .helloTestDoubleQuotedAttributeValue autoescape="strict"}
+  <div class="{$data}">Hello World</div>
+{/template}
+
+/**
+ * Single-quoted Attribute value test
+ * @param data The unstrusted input data.
+ */
+{template .helloTestSingleQuotedAttributeValue autoescape="strict"}
+  <div class='{$data}'>Hello World</div>
+{/template}
+
+/**
+ * Un-quoted Attribute value test
+ * @param data The unstrusted input data.
+ */
+{template .helloTestUnQuotedAttributeValue autoescape="strict"}
+  <div class={$data}>Hello World</div>
+{/template}
+
+/**
+ * Double-quoted Attribute value / URI test
+ * @param data The unstrusted input data.
+ */
+{template .helloTestDoubleQuotedAttributeValueURI autoescape="strict"}
+  <div><a href="{$data}">Hello World</a></div>
+{/template}
+
+/**
+ * Double-quoted Attribute value / URI test
+ * @param data The unstrusted input data.
+ */
+{template .helloTestDoubleQuotedAttributeValueJSURI autoescape="strict"}
+  <div><a href="javascript:alert('{$data}')">Hello World</a></div>
+{/template}
+
+/**
+ * <script> test
+ * @param data The unstrusted input data.
+ */
+{template .helloTestScript autoescape="strict"}
+  <script>{$data}</script>
+{/template}
+
+/**
+ * <style> test
+ * @param data The unstrusted input data.
+ */
+{template .helloTestStyle autoescape="strict"}
+  <style>{$data}</style>
+{/template}
+
+/**
+ * Greets a person using "Hello" by default.
+ * @param name The name of the person.
+ * @param? greetingWord Optional greeting word to use instead of "Hello".
+ */
+{template .helloName autoescape="strict"}
+  {if not $greetingWord}
+    Hello {$name}!
+  {else}
+    {$greetingWord} {$name}!
+  {/if}
+{/template}
+
+/**
+ * Greets a person using "Hello" by default.
+ * @param additionalNames The additional names to greet. May be an empty list.
+ */
+{template .helloNames}
+  // Greet the person.
+  {call .helloName data="all" /}<br>
+  // Greet the additional people.
+  {foreach $additionalName in $additionalNames}
+    {call .helloName}
+      {param name: $additionalName /}
+    {/call}
+    {if not isLast($additionalName)}
+      <br>  // break after every line except the last
+    {/if}
+  {ifempty}
+    No additional people to greet.
+  {/foreach}
+{/template}
+
+/**
+ * Greets a person using "Hello" by default.
+ * fail to compile
+{template .helloNamesWithinNonHTML}
+  <div 
+  {call .helloName data="all" /}
+  >
+{/template}
+ */
+
+/**
+ * Greets a person using "Hello" by default.
+ */
+{template .helloNamesWithinNonHTML}
+  <a href="{call .helloURI data="all" /}">
+{/template}
+
+/**
+ * Greets a person using "Hello" by default.
+ * @param data The unstrusted input data.
+ */
+{template .helloURI autoescape="strict" kind="uri" }
+  {$data}
+{/template}
