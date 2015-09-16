@@ -1,5 +1,24 @@
 {namespace examples.simple}
 
+/*
+| Context                       | Contextual Filtering  |
+---------------------------------------------------------
+| HTML                          | Yes                   |
+| Comment                       | Yes			|
+| Attr Name                     | Yes			|
+
+| Double Quoted Attr Value      | Yes                   |
+| Single Quoted Attr Value      | Yes                   |
+| UnQuoted Attr Value           | Yes                   |
+
+| Quoted Attr Value / CSS       | Yes			|
+| Quoted Attr Value / URI       | Yes                   |
+
+| <script> tag                  | Yes			|
+| <style> tag                   | Yes			|
+
+*/
+
 /**
  * Says hello to the world.
  */
@@ -10,14 +29,25 @@
 /**
  * HTML test
  * @param data The unstrusted input data.
+   result: filtering as expected.
  */
 {template .helloTestHTML autoescape="strict"}
   <div>{$data}</div>
 {/template}
 
 /**
+ * Comment test
+ * @param data The unstrusted input data.
+   result: filtering as expected.
+ */
+{template .helloTestComment autoescape="strict"}
+  <div><!-- {$data} -->Hello World</div>
+{/template}
+
+/**
  * Attribute name test
  * @param data The unstrusted input data.
+   result: 'zsoyz' is injected.
  */
 {template .helloTestAttributeName autoescape="strict"}
   <div {$data}>Hello World</div>
@@ -26,6 +56,7 @@
 /**
  * Double-quoted Attribute value test
  * @param data The unstrusted input data.
+   result: filtering as expected.
  */
 {template .helloTestDoubleQuotedAttributeValue autoescape="strict"}
   <div class="{$data}">Hello World</div>
@@ -34,6 +65,7 @@
 /**
  * Single-quoted Attribute value test
  * @param data The unstrusted input data.
+   result: filtering as expected.
  */
 {template .helloTestSingleQuotedAttributeValue autoescape="strict"}
   <div class='{$data}'>Hello World</div>
@@ -42,6 +74,7 @@
 /**
  * Un-quoted Attribute value test
  * @param data The unstrusted input data.
+   result: filtering as expected.
  */
 {template .helloTestUnQuotedAttributeValue autoescape="strict"}
   <div class={$data}>Hello World</div>
@@ -50,6 +83,7 @@
 /**
  * Double-quoted Attribute value / URI test
  * @param data The unstrusted input data.
+   result: 'zsoyz' is injected.
  */
 {template .helloTestDoubleQuotedAttributeValueURI autoescape="strict"}
   <div><a href="{$data}">Hello World</a></div>
@@ -58,6 +92,7 @@
 /**
  * Double-quoted Attribute value / URI test
  * @param data The unstrusted input data.
+   result: vulnerable, have reported to google.
  */
 {template .helloTestDoubleQuotedAttributeValueJSURI autoescape="strict"}
   <div><a href="javascript:alert('{$data}')">Hello World</a></div>
@@ -66,6 +101,7 @@
 /**
  * <script> test
  * @param data The unstrusted input data.
+   result: filtering as expected.
  */
 {template .helloTestScript autoescape="strict"}
   <script>{$data}</script>
@@ -74,6 +110,7 @@
 /**
  * <style> test
  * @param data The unstrusted input data.
+   result: 'zsoyz' is injected.
  */
 {template .helloTestStyle autoescape="strict"}
   <style>{$data}</style>

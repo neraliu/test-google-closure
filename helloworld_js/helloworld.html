@@ -3,6 +3,7 @@
   <title>The Hello World of Closure Templates</title>
   <script type="text/javascript" src="../closure-library/closure/goog/base.js"></script>
   <script type="text/javascript" src="soyutils.js"></script>
+  <!-- <script type="text/javascript" src="soyutils_usegoog.js"></script> -->
   <script type="text/javascript" src="simple.js"></script>
 </head>
 <body>
@@ -10,7 +11,8 @@
     // Exercise the .helloWorld template
     document.write(examples.simple.helloWorld());
 
-    document.write(examples.simple.helloTestHTML({data: '<>"\'&'}));
+    document.write(examples.simple.helloTestHTML({data: '<> "\'&'}));
+    document.write(examples.simple.helloTestComment({data: '<> "\'&'}));
     document.write(examples.simple.helloTestAttributeName({data: 'style="input"'}));
 
     document.write(examples.simple.helloTestDoubleQuotedAttributeValue({data: '"'}));

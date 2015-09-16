@@ -33,6 +33,14 @@ if (goog.DEBUG) {
 }
 
 
+examples.simple.helloTestComment = function(opt_data, opt_ignored) {
+  return soydata.VERY_UNSAFE.ordainSanitizedHtml('<div><!-- ' + soy.$$escapeHtmlRcdata(opt_data.data) + ' -->Hello World</div>');
+};
+if (goog.DEBUG) {
+  examples.simple.helloTestComment.soyTemplateName = 'examples.simple.helloTestComment';
+}
+
+
 examples.simple.helloTestDoubleQuotedAttributeValue = function(opt_data, opt_ignored) {
   return soydata.VERY_UNSAFE.ordainSanitizedHtml('<div class="' + soy.$$escapeHtmlAttribute(opt_data.data) + '">Hello World</div>');
 };
@@ -99,12 +107,12 @@ if (goog.DEBUG) {
 
 examples.simple.helloNames = function(opt_data, opt_ignored) {
   var output = examples.simple.helloName(opt_data) + '<br>';
-  var additionalNameList54 = opt_data.additionalNames;
-  var additionalNameListLen54 = additionalNameList54.length;
-  if (additionalNameListLen54 > 0) {
-    for (var additionalNameIndex54 = 0; additionalNameIndex54 < additionalNameListLen54; additionalNameIndex54++) {
-      var additionalNameData54 = additionalNameList54[additionalNameIndex54];
-      output += examples.simple.helloName({name: additionalNameData54}) + ((! (additionalNameIndex54 == additionalNameListLen54 - 1)) ? '<br>' : '');
+  var additionalNameList58 = opt_data.additionalNames;
+  var additionalNameListLen58 = additionalNameList58.length;
+  if (additionalNameListLen58 > 0) {
+    for (var additionalNameIndex58 = 0; additionalNameIndex58 < additionalNameListLen58; additionalNameIndex58++) {
+      var additionalNameData58 = additionalNameList58[additionalNameIndex58];
+      output += examples.simple.helloName({name: additionalNameData58}) + ((! (additionalNameIndex58 == additionalNameListLen58 - 1)) ? '<br>' : '');
     }
   } else {
     output += 'No additional people to greet.';
